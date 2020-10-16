@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "projects": {
+    "metro-station": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/metro-station",
+      "sourceRoot": "apps/metro-station/src",
+      "prefix": "lindsay",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/metro-station",
+            "index": "apps/metro-station/src/index.html",
+            "main": "apps/metro-station/src/main.ts",
+            "polyfills": "apps/metro-station/src/polyfills.ts",
+            "tsConfig": "apps/metro-station/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/metro-station/src/favicon.ico",
+              "apps/metro-station/src/assets"
+            ],
+            "styles": ["apps/metro-station/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/metro-station/src/environments/environment.ts",
+                  "with": "apps/metro-station/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "metro-station:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "metro-station:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "metro-station:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/metro-station/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/metro-station/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "metro-station-e2e": {
+      "root": "apps/metro-station-e2e",
+      "sourceRoot": "apps/metro-station-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/metro-station-e2e/cypress.json",
+            "tsConfig": "apps/metro-station-e2e/tsconfig.e2e.json",
+            "devServerTarget": "metro-station:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "metro-station:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/metro-station-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "metro-station"
+}
