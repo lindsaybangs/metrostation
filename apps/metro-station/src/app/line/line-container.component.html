@@ -1,0 +1,5 @@
+<div class="container">
+<div *ngFor="let line of (this.statuses$ | async)">
+    <lindsay-line [status]="line"></lindsay-line>
+</div>
+</div>
