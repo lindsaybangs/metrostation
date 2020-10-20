@@ -1,7 +1,7 @@
 import { LineContainerComponent } from './line-container.component';
-import { Observable, of } from 'rxjs';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 import { StmMetro } from '../stm.service';
+import { hot } from 'jasmine-marbles';
 
 describe('LineContainerComponent', () => {
   let component: LineContainerComponent;
@@ -21,7 +21,7 @@ describe('LineContainerComponent', () => {
 
   let mockService = {
     fetch(): Observable<StmMetro[]> {
-      return of([mockLine]);
+      return hot('a', [mockLine]);
     },
   };
 
@@ -29,8 +29,7 @@ describe('LineContainerComponent', () => {
     component = new LineContainerComponent(mockService as any);
   });
 
-  it('should retrieve the status of the lines from the service', fakeAsync(() => {
-    //spyOn(mockService, "fetch").and.returnValue(of('{ line: "Orange", status: "All good"}, { line: "Green", status: "Oh dear"}'));
+  it('should retrieve the status of the lines from the service', () => {
     const expectedStatuses = [
       {
         line: 'Orange',
@@ -42,11 +41,19 @@ describe('LineContainerComponent', () => {
       },
     ];
 
-    component.getStatuses();
-    tick();
+    spyOn(mockService, 'fetch').and.returnValue(
+      hot('a', {
+        a: [
+          { name: 'Orange', data: { text: 'All good' } },
+          { name: 'Green', data: { text: 'Oh dear' } },
+        ],
+      })
+    );
 
-    // TODO: Find practices for assertions on ob
-    //console.log(component.statuses$);
-    //expect(component.statuses$).toBe(of(expectedStatuses));
-  }));
+    component.loadStatuses();
+
+    expect(component.statuses$).toBeObservable(
+      hot('a', { a: expectedStatuses })
+    );
+  });
 });
