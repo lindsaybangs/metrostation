@@ -2,21 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LineComponent } from './line.component';
 
 describe('LineComponent', () => {
-  let fixture: ComponentFixture<LineComponent>;
   let component: LineComponent;
+  let fixture: ComponentFixture<LineComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [LineComponent],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [LineComponent],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(LineComponent);
-    component = TestBed.inject(LineComponent);
-    component.status = { line: 'Orange', status: 'ok' };
   });
 
-  it('should render with line status available', () => {
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LineComponent);
+    component = fixture.componentInstance;
+  });
+
+  it.each`
+    status
+    ${'running'}
+    ${'unavailable'}
+    ${undefined}
+  `('should render when the status is $status', ({ status }) => {
+    component.status = { line: 'Orange', status: status };
+    fixture.detectChanges();
+
+    expect(fixture).toMatchSnapshot();
+  });
+
+  it('should render when there is no status', () => {
+    component.status = { line: undefined, status: undefined };
+    fixture.detectChanges();
+
     expect(fixture).toMatchSnapshot();
   });
 });

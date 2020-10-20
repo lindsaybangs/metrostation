@@ -1,7 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LineComponent should render with line status available 1`] = `
-<lindsay-line>
+exports[`LineComponent should render when the status is running 1`] = `
+<lindsay-line
+  status={[Function Object]}
+>
+  <div>
+    <h1>
+      Orange
+    </h1>
+    <p>
+      running
+    </p>
+  </div>
+</lindsay-line>
+`;
+
+exports[`LineComponent should render when the status is unavailable 1`] = `
+<lindsay-line
+  status={[Function Object]}
+>
+  <div>
+    <h1>
+      Orange
+    </h1>
+    <p>
+      unavailable
+    </p>
+  </div>
+</lindsay-line>
+`;
+
+exports[`LineComponent should render when the status is undefined 1`] = `
+<lindsay-line
+  status={[Function Object]}
+>
+  <div>
+    <h1>
+      Orange
+    </h1>
+    <p>
+      
+    </p>
+  </div>
+</lindsay-line>
+`;
+
+exports[`LineComponent should render when there is no status 1`] = `
+<lindsay-line
+  status={[Function Object]}
+>
   <div>
     <h1>
       
