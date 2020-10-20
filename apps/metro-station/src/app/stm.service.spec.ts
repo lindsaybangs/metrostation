@@ -1,14 +1,14 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { hot } from 'jasmine-marbles';
 
-import { StmService } from './stm.service';
+import { StmMetro, StmResponse, StmService } from './stm.service';
 
 describe('STM Service', () => {
   let service: StmService;
 
-  let http = {
-    get(): any {}
-  };
+  let http: HttpClient = {
+    get(): any {},
+  } as any;
 
   beforeEach(() => {
     service = new StmService(http as any);
@@ -18,14 +18,75 @@ describe('STM Service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get data through the HttpClient', fakeAsync(() => {
+  it('should get data through the HttpClient', () => {
+    const expectedResponse: StmMetro[] = [
+      {
+        id: '123',
+        name: 'Orange',
+        data: {
+          text: '',
+          priority: '',
+          level: '',
+          logic_number: '',
+          start_date: '',
+          start_time: '',
+        },
+      },
+    ];
 
-    spyOn(http, "get").and.returnValue(of("blah"));
+    /**
+ * "metro": {
+        "1": {
+            "name": "Ligne verte",
+            "id": "1",
+            "data": {
+                "text": "Service normal du métro",
+                "priority": "88",
+                "level": "Metro",
+                "logic_number": "1343111",
+                "start_date": "20201015",
+                "start_time": "0914"
+            }
+        },
+        "2": {
+            "name": "Ligne orange",
+            "id": "2",
+            "data": {
+                "text": "Service normal du métro",
+                "priority": "88",
+                "level": "Metro",
+                "logic_number": "1365682",
+                "start_date": "20201014",
+                "start_time": "1115"
+            }
+        },
+ */
+
+    const httpMetroResponse = {
+      metro: {
+        '1': {
+          id: '123',
+          name: 'Orange',
+          data: {
+            text: '',
+            priority: '',
+            level: '',
+            logic_number: '',
+            start_date: '',
+            start_time: '',
+          },
+        },
+      },
+    };
+
+    const httpResponse = {
+      language: 'en',
+      status: '',
+      metro: httpMetroResponse,
+    };
+    spyOn(http, 'get').and.returnValue(hot('a', { a: httpResponse }));
+
     const res = service.fetch();
-
-    tick();
-
-    //expect(res).toBe(of("blah"));
-  }));
+    expect(res).toBeObservable(hot('a', { a: [expectedResponse] }));
+  });
 });
-
