@@ -29,6 +29,9 @@
     "metro-station-e2e": {
       "tags": [],
       "implicitDependencies": ["metro-station"]
+    },
+    "status-api": {
+      "tags": []
     }
   }
 }
