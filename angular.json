@@ -116,6 +116,56 @@
           }
         }
       }
+    },
+    "status-api": {
+      "root": "apps/status-api",
+      "sourceRoot": "apps/status-api/src",
+      "projectType": "application",
+      "prefix": "status-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/status-api",
+            "main": "apps/status-api/src/main.ts",
+            "tsConfig": "apps/status-api/tsconfig.app.json",
+            "assets": ["apps/status-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/status-api/src/environments/environment.ts",
+                  "with": "apps/status-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "status-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/status-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/status-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
