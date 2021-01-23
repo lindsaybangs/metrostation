@@ -28,8 +28,7 @@ export interface StmResponse {
   providedIn: 'root',
 })
 export class StmService {
-  private baseUrl =
-    'http://www.stm.info/en/ajax/etats-du-service?_=1588642571897';
+  private baseUrl = 'http://localhost:3333/api';
 
   constructor(private http: HttpClient) {}
 
