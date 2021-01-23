@@ -45,10 +45,10 @@ export class StmService {
 
     return response$.pipe(
       map((s) => s.metro),
-      tap((x) => console.log(x)),
+      // tap((x) => console.log(x)),
 
-      map((s) => Object.values(s)),
-      tap((x) => console.log(x))
+      map((s) => Object.values(s))
+      // tap((x) => console.log(x))
     );
   }
 }

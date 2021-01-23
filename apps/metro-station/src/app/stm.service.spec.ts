@@ -63,8 +63,8 @@ describe('STM Service', () => {
  */
 
     const httpMetroResponse = {
-      metro: {
-        '1': {
+      metro: [
+        {
           id: '123',
           name: 'Orange',
           data: {
@@ -76,7 +76,7 @@ describe('STM Service', () => {
             start_time: '',
           },
         },
-      },
+      ],
     };
 
     const httpResponse = {
