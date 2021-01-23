@@ -1,10 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { HttpService, Injectable } from '@nestjs/common';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class StmService {
-  //private baseUrl = "http://www.stm.info/en/ajax/etats-du-service?_=1588642571897";
+  private baseUrl =
+    'http://www.stm.info/en/ajax/etats-du-service?_=1588642571897';
 
-  getData(): any {
+  constructor(private readonly http: HttpService) {}
+
+  getRawData(): any {
+    return this.http.get(this.baseUrl).pipe(map((response) => response.data));
+  }
+
+  getHardcodedData(): any {
     return {
       language: 'en',
       status: 'ok',

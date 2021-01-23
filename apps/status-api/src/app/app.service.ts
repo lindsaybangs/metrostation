@@ -10,6 +10,6 @@ export class AppService {
   }
 
   getHardcodedStmData(): any {
-    return this.stm.getData();
+    return this.stm.getRawData();
   }
 }

@@ -8,6 +8,11 @@ export class AppController {
 
   @Get()
   getData() {
+    return this.appService.getData();
+  }
+
+  @Get('/raw')
+  getRawData() {
     return this.appService.getHardcodedStmData();
   }
 }
