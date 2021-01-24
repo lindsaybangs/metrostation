@@ -1,7 +1,7 @@
 import { LineContainerComponent } from './line-container.component';
 import { Observable } from 'rxjs';
 import { StmMetro } from '../stm.service';
-import { hot } from 'jasmine-marbles';
+import { hot } from 'jest-marbles';
 
 describe('LineContainerComponent', () => {
   let component: LineContainerComponent;
