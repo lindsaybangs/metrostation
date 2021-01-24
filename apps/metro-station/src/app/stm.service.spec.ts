@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { hot } from 'jasmine-marbles';
+import { hot } from 'jest-marbles';
 
-import { StmMetro, StmResponse, StmService } from './stm.service';
+import { StmMetro, StmService } from './stm.service';
 
 describe('STM Service', () => {
   let service: StmService;
