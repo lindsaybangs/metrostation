@@ -39,7 +39,7 @@ export class StmService {
     );
 
     const response$: Observable<StmResponse> = this.http.get<StmResponse>(
-      this.baseUrl,
+      `${this.baseUrl}/raw`,
       { headers }
     );
 
