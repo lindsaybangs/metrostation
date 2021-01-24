@@ -31,8 +31,8 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "npm run affected:lint --uncommitted",
-      "pre-push": "npm run affected:test"
+      "pre-commit": "npm run affected:lint --uncommitted true",
+      "pre-push": "npm run affected:test --uncommitted true"
     }
   },
   "dependencies": {
