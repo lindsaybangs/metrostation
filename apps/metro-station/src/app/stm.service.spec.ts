@@ -6,7 +6,7 @@ import { StmMetro, StmService } from './stm.service';
 describe('STM Service', () => {
   let service: StmService;
 
-  let http: HttpClient = {
+  const http: HttpClient = {
     get(): any {},
   } as any;
 

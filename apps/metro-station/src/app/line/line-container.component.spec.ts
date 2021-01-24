@@ -1,12 +1,12 @@
 import { LineContainerComponent } from './line-container.component';
 import { Observable } from 'rxjs';
-import { StmMetro } from '../stm.service';
+import { StmMetro, StmService } from '../stm.service';
 import { hot } from 'jest-marbles';
 
 describe('LineContainerComponent', () => {
   let component: LineContainerComponent;
 
-  let mockLine: StmMetro = {
+  const mockLine: StmMetro = {
     id: '',
     name: '',
     data: {
@@ -19,14 +19,14 @@ describe('LineContainerComponent', () => {
     },
   };
 
-  let mockService = {
+  const mockService: StmService = {
     fetch(): Observable<StmMetro[]> {
       return hot('a', [mockLine]);
     },
-  };
+  } as any;
 
   beforeEach(() => {
-    component = new LineContainerComponent(mockService as any);
+    component = new LineContainerComponent(mockService);
   });
 
   it('should retrieve the status of the lines from the service', () => {

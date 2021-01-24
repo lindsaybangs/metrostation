@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 export interface MetroLine {
   line: string;
@@ -11,10 +11,6 @@ export interface MetroLine {
   templateUrl: './line.component.html',
   styleUrls: ['./line.component.scss'],
 })
-export class LineComponent implements OnInit {
+export class LineComponent {
   @Input() status: MetroLine;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }
