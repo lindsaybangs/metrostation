@@ -1,5 +1,5 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class StmService {

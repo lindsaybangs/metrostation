@@ -31,8 +31,8 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "npm run affected:lint --uncommitted true",
-      "pre-push": "npm run affected:test --uncommitted true"
+      "pre-commit": "nx affected:lint --parallel",
+      "pre-push": "nx affected:test --parallel"
     }
   },
   "dependencies": {
